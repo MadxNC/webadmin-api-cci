@@ -1,0 +1,47 @@
+{% for menu in menus %}
+    {% if app.user.groupe.niveau >= menu.niveauPermission %}
+        <li class="m-menu__item  {% if isActive(menu,request.requestUri)  %}m-menu__item--active{% endif %} {% if menu.children|length > 0 %}m-menu__item--submenu{% endif %}" aria-haspopup="true" {% if menu.children|length > 0 %}m-menu-submenu-toggle="hover"{% endif %}>
+            <a href="{% if menu.route and menu.children|length == 0 %}{% if menu.isRouteValid %} {{ path(menu.route) }} {% else %}#routeInvalide{% endif %}{% else %}javascript:;{% endif %}" class="m-menu__link {% if menu.children|length > 0 %}m-menu__toggle{% endif %}">
+                <i class="m-menu__link-icon {{ menu.icon }}   mr-1"></i>
+                <span class="m-menu__link-text">{{menu.name}}</span>
+                {% if menu.children|length > 0 %} <i class="m-menu__ver-arrow la la-angle-right"></i> {% endif %}
+            </a>
+            {% if menu.children|length > 0 %}
+                <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span class="m-menu__link"><span class="m-menu__link-text">{{menu.name}}</span></span></li>
+                        {% for child in menu.children %}
+                            {% if app.user.groupe.niveau >= child.niveauPermission %}
+                                <li class="m-menu__item {% if isActive(child,request.requestUri) %}m-menu__item--active{% endif %} {% if child.children|length > 0 %}m-menu__item--submenu{% endif %}" aria-haspopup="true" {% if child.children|length > 0 %}m-menu-submenu-toggle="hover"{% endif %}>
+                                    <a href="{% if child.route and child.children|length == 0 %}{% if child.isRouteValid %} {{ path(child.route) }} {% else %}#routeInvalide{% endif %}{% else %}javascript:;{% endif %}" class="m-menu__link {% if child.children|length > 0 %}m-menu__toggle{% endif %}">
+                                        <i class="m-menu__link-bullet {{child.icon}} mr-1"></i>
+                                        <span class="m-menu__link-text">{{child.name}}</span>
+                                        {% if child.children|length > 0 %} <i class="m-menu__ver-arrow la la-angle-right"></i>{% endif %}
+                                    </a>
+                                    {% if child.children|length > 0 %}
+                                        <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
+                                            <ul class="m-menu__subnav">
+                                                <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span class="m-menu__link"><span class="m-menu__link-text">{{child.name}}</span></span></li>
+                                                {% for childchild in child.children %}
+                                                    {% if app.user.groupe.niveau >= childchild.niveauPermission %}
+                                                        <li class="m-menu__item {% if isActive(childchild,request.requestUri) %}m-menu__item--active{% endif %}" aria-haspopup="true" >
+                                                            <a href="{% if childchild.isRouteValid %}{{ path(childchild.route) }}{% else %}javascript:;{% endif %}" class="m-menu__link">
+                                                                <i class="m-menu__link-bullet {{childchild.icon}} "></i>
+                                                                <span class="m-menu__link-text">{{childchild.name}}</span>
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </li>
+    {% endif %}
+
+{% endfor %}

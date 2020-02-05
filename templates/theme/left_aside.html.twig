@@ -1,0 +1,45 @@
+
+<!-- BEGIN: Left Aside -->
+<button class="m-aside-left-close  m-aside-left-close--skin-dark " id="m_aside_left_close_btn"><i class="la la-close"></i></button>
+<div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+
+    <!-- BEGIN: Aside Menu -->
+    <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
+        <ul class="m-menu__nav ">
+            <li class="m-menu__section m-menu__section--first">
+                <h4 class="m-menu__section-text">Menu</h4>
+                <i class="m-menu__section-icon flaticon-more-v2"></i>
+            </li>
+            <li class="m-menu__item  {% if app.request.requestUri == path('index') %}m-menu__item--active{% endif %} " aria-haspopup="true"><a href="{{ path('index') }}" class="m-menu__link "><span class="m-menu__item-here"></span><i class="m-menu__link-icon flaticon-home"></i><span class="m-menu__link-text">Accueil</span></a></li>
+            <div id="menu"></div>
+            {{ render(controller(
+                'App\\Controller\\MenuController::menu'
+            )) }}
+
+            {% if is_granted('ROLE_ADMIN') %}
+
+                <li class="m-menu__section ">
+                    <h4 class="m-menu__section-text">Administration</h4>
+                    <i class="m-menu__section-icon flaticon-more-v2"></i>
+                </li>
+                <li class="m-menu__item m-menu__item--submenu {% if ((app.request.requestUri == path('users')) or (app.request.requestUri == path('groups')) or (app.request.requestUri == path('menus'))) %}m-menu__item--active{% endif %}" aria-haspopup="true" m-menu-submenu-toggle="hover"><a href="javascript:;" class="m-menu__link m-menu__toggle"><span class="m-menu__item-here"></span><i class="m-menu__link-icon flaticon-layers"></i><span class="m-menu__link-text">Administration</span><i class="m-menu__ver-arrow la la-angle-right"></i></a>
+                    <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
+                        <ul class="m-menu__subnav">
+                            <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span class="m-menu__link"><span class="m-menu__item-here"></span><span class="m-menu__link-text">Resources</span></span></li>
+                            <li class="m-menu__item {% if app.request.requestUri == path('users') %}m-menu__item--active{% endif %} " aria-haspopup="true"><a href="{{ path('users') }}" class="m-menu__link "><span class="m-menu__link-text"><i class="fa fa-users w-25"><span></span></i> Utilisateurs</span></a></li>
+                            <li class="m-menu__item {% if app.request.requestUri == path('groups') %}m-menu__item--active{% endif %}" aria-haspopup="true" m-menu-link-redirect="1"><a href="{{ path('groups') }}" class="m-menu__link "><span class="m-menu__link-text"><i class="fa fa-object-group w-25"><span></span></i> Groupes</span></a></li>
+                            <li class="m-menu__item {% if app.request.requestUri == path('menus') %}m-menu__item--active{% endif %}" aria-haspopup="true" m-menu-link-redirect="1"><a href="{{ path('menus') }}" class="m-menu__link "><span class="m-menu__link-text"><i class="fa fa-bars w-25"><span></span></i> Menus</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+
+
+            {% endif %}
+
+        </ul>
+    </div>
+
+    <!-- END: Aside Menu -->
+</div>
+
+<!-- END: Left Aside -->

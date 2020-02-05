@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un groupe{% endblock %}
+
+{%  block body %}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                            <i class="la la-info-circle"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text">
+                                {% block portlet_head %}Détails du groupe{% endblock %}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                {{ form_start(form, {'attr': {'class' : 'm-form'} }) }}
+                <div class="m-portlet__body">
+                    <div class="m-form__section m-form__section--first">
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.name, {'attr': {'class' : 'form-control m-input'}} ) }}
+                        </div>
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.role, {'attr': {'class' : 'form-control m-input'}}) }}
+                        </div>
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.niveau, {'attr': {'class' : 'form-control m-input'}}) }}
+                        </div>
+                        <div class="form-group m-form__group">
+                            {{ form_row(form.isActive, {'attr': {'class' : 'form-control m-checkbox'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__foot m-portlet__foot--fit">
+                    <div class="m-form__actions m-form__actions">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-success">{% block submit_btn_name %}Créer le nouveau groupe{% endblock %}</button>
+                                <a href="{{ path('groups') }}"><button type="button" class="btn btn-secondary">Annuler</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+                <!--end::Form-->
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,67 @@
+div#clients_table_length label, div#clients_table_filter label {
+    font-size: 14px;
+}
+
+
+div#clients_table_filter input {
+    border: solid 2px dodgerblue;
+    border-radius: 22px;
+}
+
+ thead {
+    background-color: #5867dd !important;
+    color: white !important;
+}
+
+ th {
+    border-bottom: none !important;
+    border-color: #6772cc !important;
+    font-weight: 400 !important;
+}
+.dataTables_wrapper .dataTable {
+    margin: 0 !important;
+}
+
+.label-custom {
+    margin-top: 0.5em;
+}
+
+input {
+    color: black !important;
+    font-weight: 700;
+}
+
+.form-text.text-muted {
+    color: #35419c !important;
+}
+
+.custom-file-label::after {
+    content: 'Parcourir' !important;
+}
+
+.import_list {
+    max-height: 500px;
+    overflow: auto;
+    padding: 15px 20px;
+    background: white;
+}
+
+ul#disabling_details ,ul#search_details {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul#disabling_details li, ul#search_details li {
+    margin: 5px 0;
+}
+
+body.swal2-height-auto {
+    height: inherit!important;
+}
+
+.home-link {
+    padding: 35px;
+    font-size: large;
+    font-weight: 500;
+    color: white;
+}

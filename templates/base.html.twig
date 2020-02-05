@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>
+            {% block title %}Welcome!
+            {% endblock %}
+        </title>
+        <meta name="description" content="Latest updates and statistic charts">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+        <script>
+            WebFont.load({
+                google: {
+                    "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+                },
+                active: function () {
+                    sessionStorage.fonts = true;
+                }
+            });
+        </script>
+        {% block stylesheets %}
+            <link href="/assets/vendors/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/select2/dist/css/select2.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/owl.carousel/dist/assets/owl.carousel.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/vendors/flaticon/css/flaticon.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/vendors/metronic/css/styles.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/vendors/fontawesome5/css/all.min.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/socicon/css/socicon.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/vendors/vendors/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css"/>
+            <link href="/assets/css/sweetalert2.css" rel="stylesheet" type="text/css"/>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+            <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.6/b-colvis-1.5.6/b-flash-1.5.6/b-html5-1.5.6/b-print-1.5.6/cr-1.5.0/fc-3.2.5/fh-3.1.4/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-2.0.0/sl-1.3.0/datatables.min.css"/>
+            <link rel="stylesheet" href="/assets/css/style.css?v={{ random() }}">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"/>
+        {% endblock %}
+        <link rel="shortcut icon" href="/assets/app/media/img/logos/favicon-si2p.png"/>
+    </head>
+    <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
+        <div class="m-grid m-grid--hor m-grid--root m-page">
+            {% include 'theme/header.html.twig' %}
+            <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+                {% include 'theme/left_aside.html.twig' %}
+                <div class="m-grid__item m-grid__item--fluid m-wrapper">
+                    {% include 'theme/subheader.html.twig' %}
+                    <div class="m-content"> {% block body %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+                {% include 'theme/footer.html.twig' %}
+            </div>
+            <div id="m_scroll_top" class="m-scroll-top">
+                <i class="la la-arrow-up"></i>
+            </div>
+            {% block javascripts %}
+                <script src="/assets/vendors/jquery/dist/jquery.js" type="text/javascript"></script>
+                <script src="/assets/vendors/popper.js/dist/umd/popper.js" type="text/javascript"></script>
+                <script src="/assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+                <script src="/assets/vendors/js-cookie/src/js.cookie.js" type="text/javascript"></script>
+                <script src="/assets/vendors/moment/min/moment.min.js" type="text/javascript"></script>
+                <script src="/assets/vendors/tooltip.js/dist/umd/tooltip.min.js" type="text/javascript"></script>
+                <script src="/assets/vendors/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
+                <script src="/assets/vendors/wnumb/wNumb.js" type="text/javascript"></script>
+                <script src="/assets/vendors/owl.carousel/dist/owl.carousel.js" type="text/javascript"></script>
+                <script src="/assets/app/js/scripts.bundle.js" type="text/javascript"></script>
+                <script src="/assets/vendors/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
+                <script src="/assets/app/js/sweetalert2.min.js" type="text/javascript"></script>
+                <script src="/assets/app/js/dashboard.js" type="text/javascript"></script>
+                <script src="/assets/app/js/script.js" type="text/javascript" defer></script>
+                <script type="text/javascript" src="{{ asset("/assets/vendors/notify.js") }}"></script>
+            {% endblock %}
+
+            {% block jscustombottom %}{% endblock %}
+
+        </body>
+    </html>

@@ -1,0 +1,27 @@
+<table id="members_datatable" class="table table-sm m-table m-table--head-bg-brand">
+    <thead>
+        <th>#</th>
+        <th>Nom d'utilisateur</th>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.id }}</td>
+            <td>{{ member.username }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    var members_datatable = $('#members_datatable').mDatatable({
+        columns : [{
+            field:'id',
+            type:'number',
+            width: 30
+        },{
+            field:'username',
+            type:'string'
+        }]
+    });
+</script>

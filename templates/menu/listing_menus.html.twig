@@ -1,0 +1,124 @@
+{% extends 'admin/listing.html.twig' %}
+
+{% block title %}Gestion des menus {% endblock %}
+
+{% block subheader %}Liste des menus{% endblock %}
+
+{% block widgettop %}
+    <div class="m-portlet ">
+        <div class="m-portlet__body  m-portlet__body--no-padding">
+            <div class="row m-row--no-padding m-row--col-separator-xl">
+                <div class="col-md-12 col-lg-6">
+                    <!--begin::Total Profit-->
+                    <div class="m-widget24">
+                        <div class="m-widget24__item">
+                            <h4 class="m-widget24__title">
+                                 Créer un menu
+                            </h4><br>
+                            <span class="m-widget24__desc">
+				            Création d'un menu parent ou enfant
+				        </span>
+                            <div class="m--space-10"></div>
+                            <span class="m-widget24__change">
+							<a href="{{ path('create_menu') }}"><button type="button" class="btn m-btn--pill m-btn--air  btn-success m-btn m-btn--custom"><i class="fa fa-plus mr-1"></i> Créer un menu</button></a>
+						</span>
+                        </div>
+                    </div>
+                    <!--end::Total Profit-->
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <!--begin::Total Profit-->
+                    <div class="m-widget24">
+                        <div class="m-widget24__item">
+                            <h4 class="m-widget24__title">
+                                 Vérifier les routes
+                            </h4><br>
+                            <span class="m-widget24__desc">
+				            Contrôle la totalité des menus existants
+				        </span>
+                            <div class="m--space-10"></div>
+                            <span class="m-widget24__change">
+                            <a href="javascript:;"  class="check-routes-btn"><button type="button" class="btn m-btn--pill m-btn--air btn-warning m-btn--wide"><i class="fa fa-road mr-1"></i> Vérifier les routes</button></a>
+						</span>
+                        </div>
+                    </div>
+                    <!--end::Total Profit-->
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-3">
+
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-3">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block navitems %}
+{% endblock %}
+
+
+{% block table %}
+    <table class="m-datatable" id="listing_menus_table" width="100%">
+        <thead>
+        <tr>
+            <th data-field="id">ID</th>
+            <th data-field="name">Libelle</th>
+            <th data-field="parent">Menu parent</th>
+            <th data-field="route">Route</th>
+            <th data-field="isActive">Status</th>
+            <th data-field="edit">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%  for menu in menus%}
+            <tr>
+                <td>{{ menu.id }}</td>
+                <td>
+                    {{ menu.name }}
+                </td>
+                <td>
+                    {% if menu.parent  %}
+                        {{ menu.parent.name }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if menu.route %}
+                        {{ menu.route }}
+                        <span class="check_route" data-ref="{{ menu.id }}"  data-href="{{ path('check_route', {'route_name' : menu.route, 'menu_id' : menu.id }) }}"></span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if menu.isActive %}
+                        <a href="#" class="btn btn-success btn-sm m-btn m-btn m-btn--icon">
+									<span>
+										<i class="la la-calendar-check-o"></i>
+										<span>En ligne</span>
+									</span>
+                        </a>
+                    {% else %}
+                        <a href="#" class="btn btn-danger m-btn btn-sm 	m-btn m-btn--icon">
+									<span>
+										<i class="la la-warning"></i>
+										<span>Hors ligne</span>
+									</span>
+                        </a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('edit_menu', {'menu_id' : menu.id }) }}" class="btn btn-info m-btn m-btn--icon m-btn--icon-only">
+                        <i class="la la-pencil"></i>
+                    </a>
+                    <a title="Supprimer" data-href="{{ path('delete_menu', {'menu_id': menu.id }) }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m--font-light delete_confirmation">
+                        <i class="la la-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DEV - Enfants{% endblock %}
+
+{%  block body %}
+    {{ dump(menu) }}
+    <strong>Enfants</strong>
+    {{ dump(children) }}
+
+    <ul>
+        {%  for child in children  %}
+            <li>{{ child.name }}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <strong>Groupes</strong>
+    {{ dump(groupes) }}
+
+    <ul>
+    {%  for groupe in groupes  %}
+        <li>{{ groupe.name }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

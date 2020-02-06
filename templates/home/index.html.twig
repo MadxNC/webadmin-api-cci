@@ -29,7 +29,7 @@
                                 <input type="number" max="99" min="2" class="form-control" name="length" value="{{ limit }}" placeholder="Nombre de resultat attendu (max 99)" required>
                             </div>
                             <div class="form-group m-form__group col-4">
-                                <label>Tapez un pays</label>
+                                <label>Tapez une année</label>
                                 <select class="form-control" name="year" required>
                                     {% for i in 1960..2014 %}
                                         {% if year == i %}
@@ -39,6 +39,17 @@
                                         {% endif %}
                                     {% endfor %}
                                 </select>
+                            </div>
+                            <div class="col-4 mt-4 pt-2">
+                                <button class="btn btn-primary btn-block" type="submit">Faire le graphique</button>
+                            </div>
+					    </div>
+                    </form>
+                    <form action="javascript:void(0)" method="get">
+					    <div class="m-form__section m-form__section--first row">
+                            <div class="form-group m-form__group col-8">
+                                <label>Choisir un pays</label>
+                                <input class="form-control" id="countries-flags" name="country" required>
                             </div>
                             <div class="col-4 mt-4 pt-2">
                                 <button class="btn btn-primary btn-block" type="submit">Faire le graphique</button>
@@ -85,5 +96,32 @@ new Chart(ctx, {
     type: 'polarArea'
 });
 {% endif %}
+</script>
+<script>
+var options = {
+
+  url: "/assets/app/json/countries.json",
+
+  getValue: "name",
+
+  list: {
+    match: {
+      enabled: true
+    },
+    maxNumberOfElements: 8
+  },
+
+  template: {
+    type: "custom",
+    method: function(value, item) {
+      return "<span class='flag flag-" + (item.code).toLowerCase() + "' ></span>" + value;
+    }
+  },
+
+  theme: "round"
+};
+
+$("#countries-flags").easyAutocomplete(options);
+
 </script>
 {% endblock %}

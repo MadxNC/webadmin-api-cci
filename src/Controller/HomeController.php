@@ -16,6 +16,7 @@ class HomeController extends Controller
     {
         $year = null;
         $limit = null;
+        $country = null;
         $result = null;
 
         if (isset($_GET['year'])) {
@@ -26,11 +27,21 @@ class HomeController extends Controller
             $limit = $_GET['length'];
         }
 
+        if (isset($_GET['country'])) {
+            $country = $_GET['country'];
+        }
+
         if (isset($_GET['length']) && isset($_GET['year'])) {
             $api = 'http://localhost:3000/api/data?key=u9zDkZNhfHrqF8ra8pkqZgGwJfXcZJR4cBDALR2Qr7EpXMaSA8krbpRRq2WUydVC&year='.$year.'&limit='.$limit;
             $result = json_decode(file_get_contents($api));
         }
 
+        if (isset($_GET['country'])) {
+            $api = 'http://localhost:3000/api/data?key=u9zDkZNhfHrqF8ra8pkqZgGwJfXcZJR4cBDALR2Qr7EpXMaSA8krbpRRq2WUydVC&country='.$country;
+            $result = json_decode(file_get_contents($api));
+        }
+
+        // dd($result);
         
         // dd($result);
 

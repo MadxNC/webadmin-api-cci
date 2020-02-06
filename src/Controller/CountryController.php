@@ -22,7 +22,7 @@ class CountryController extends AbstractController
 
         $result = $statement->fetchAll();
 
-        dd($result);
+        // dd($result);
 
         return $this->render('country/index.html.twig', [
             'controller_name' => 'CountryController',

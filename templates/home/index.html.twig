@@ -5,5 +5,85 @@
 {% block page_title %}Accueil{% endblock %}
 
 {% block body %}
-   
+    <div class="row">
+
+		<div class="col-sm-12">
+			<div class="m-portlet m-portlet--success m-portlet--head-solid-bg">
+				<div class="m-portlet__head">
+					<div class="m-portlet__head-caption">
+						<div class="m-portlet__head-title">
+							<span class="m-portlet__head-icon">
+								<i class="flaticon-plus"></i>
+							</span>
+							<h3 class="m-portlet__head-text">
+								Vos datas
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="m-portlet__body">
+                    <form method="get">
+					    <div class="m-form__section m-form__section--first row">
+                            <div class="form-group m-form__group col-4">
+                                <label>Choisir une nombre de resultat attendu</label>
+                                <input type="number" max="99" min="2" class="form-control" name="length" value="{{ limit }}" placeholder="Nombre de resultat attendu (max 99)" required>
+                            </div>
+                            <div class="form-group m-form__group col-4">
+                                <label>Tapez un pays</label>
+                                <select class="form-control" name="year" required>
+                                    {% for i in 1960..2014 %}
+                                        {% if year == i %}
+                                        <option selected="{{i}}" value="{{i}}">{{i}}</option>
+                                        {% else %}
+                                        <option value="{{i}}">{{i}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-4 mt-4 pt-2">
+                                <button class="btn btn-primary btn-block" type="submit">Faire le graphique</button>
+                            </div>
+					    </div>
+                    </form>
+                    <canvas id="myChart" width="400" height="200"></canvas>
+				</div>
+				<div class="m-portlet__foot"></div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block jscustombottom %}
+<script>
+var randomColorGenerator = function () { 
+    return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
+};
+{% if datas %}
+var data = {
+    datasets: [{
+        data: [
+            {% for message in datas.message %}
+                {{ message.data }},
+            {% endfor %}
+        ],
+        backgroundColor: [
+            {% for message in datas.message %}
+                randomColorGenerator(),
+            {% endfor %}
+        ],
+        label: 'Les pays' // for legend
+    }],
+    labels: [
+        {% for message in datas.message %}
+            "{{ message.CountryName }}",
+        {% endfor %}
+    ]
+};
+var ctx = $("#myChart");
+new Chart(ctx, {
+    data: data,
+    type: 'polarArea'
+});
+{% endif %}
+</script>
 {% endblock %}
